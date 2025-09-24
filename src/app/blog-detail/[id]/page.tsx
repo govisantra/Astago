@@ -1,8 +1,12 @@
-export default function BlogDetailPage() {
+type PageProps = {
+  params: { id: string }
+}
+
+export default async function Page({ params }: PageProps) {
+  // you can use params.id here
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>Blog Detail Page</h1>
-      <p>This is a placeholder page. Content will be added later.</p>
+    <div>
+      <h1>Page for ID: {params.id}</h1>
     </div>
-  );
+  )
 }
