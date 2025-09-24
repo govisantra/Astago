@@ -1,9 +1,4 @@
-type PageProps = {
-  params: { id: string }
-}
-
-export default async function Page({ params }: PageProps) {
-  // you can use params.id here
+export default async function Page({ params }: any) {
   return (
     <div>
       <h1>Page for ID: {params.id}</h1>
