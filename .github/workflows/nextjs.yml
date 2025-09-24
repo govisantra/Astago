@@ -28,24 +28,22 @@ jobs:
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
           elif [ -f "${{ github.workspace }}/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci --legacy-peer-deps" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
           else
             echo "Unable to determine package manager"
             exit 1
           fi
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
@@ -64,7 +62,7 @@ jobs:
 
       - name: Build with Next.js (ignore type errors)
         run: |
-          echo 'SKIP TypeScript errors — using ignoreBuildErrors=true'
+          echo 'Skipping TypeScript errors with ignoreBuildErrors=true'
           NEXT_IGNORE_BUILD_ERRORS=1 ${{ steps.detect-package-manager.outputs.runner }} next build
 
       - name: Upload artifact
